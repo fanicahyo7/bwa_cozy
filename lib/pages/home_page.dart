@@ -1,3 +1,4 @@
+import 'package:bwa_cozy/models/city.dart';
 import 'package:bwa_cozy/theme.dart';
 import 'package:bwa_cozy/widgets/city_card.dart';
 import 'package:flutter/material.dart';
@@ -45,8 +46,41 @@ class HomePage extends StatelessWidget {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                CityCard(), 
-                CityCard()],
+                SizedBox(
+                  width: 24,
+                ),
+                CityCard(
+                  City(
+                    id: 1,
+                    nama: 'Jakarta',
+                    urlImage: 'assets/city1.png',
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                CityCard(
+                  City(
+                    id: 2,
+                    nama: 'Bandung',
+                    urlImage: 'assets/city2.png',
+                    isFavo: true,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                CityCard(
+                  City(
+                    id: 3,
+                    nama: 'Surabaya',
+                    urlImage: 'assets/city3.png',
+                  ),
+                ),
+                SizedBox(
+                  width: 24,
+                ),
+              ],
             ),
           )
         ],
