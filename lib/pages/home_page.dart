@@ -1,8 +1,10 @@
 import 'package:bwa_cozy/models/city.dart';
 import 'package:bwa_cozy/models/space.dart';
+import 'package:bwa_cozy/models/tips.dart';
 import 'package:bwa_cozy/theme.dart';
 import 'package:bwa_cozy/widgets/city_card.dart';
 import 'package:bwa_cozy/widgets/space_card.dart';
+import 'package:bwa_cozy/widgets/tips_card.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -137,7 +139,37 @@ class HomePage extends StatelessWidget {
                     imageUrl: 'assets/reko3.png'))
               ],
             ),
-          )
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          //NOTE : TIPS
+          Container(
+            padding: EdgeInsets.only(left: jarak),
+            margin: EdgeInsets.only(bottom: 16),
+            child: Text(
+              'Tips & Guidance',
+              style: TextStyle(color: blackColor, fontSize: 16),
+            ),
+          ),
+          Column(
+            children: [
+              TipsCard(Tips(
+                  id: 1,
+                  title: 'City Guidelines',
+                  imageUrl: 'assets/icon.png',
+                  updatedAt: 'Updated 20 Apr')),
+              SizedBox(
+                height: 20,
+              ),
+              TipsCard(Tips(
+                  id: 2,
+                  title: 'Jakarta Fairship',
+                  imageUrl: 'assets/icon2.png',
+                  updatedAt: 'Updated 11 Dec'))
+            ],
+          ),
+          SizedBox(height: 145,)
         ],
       )),
     );
