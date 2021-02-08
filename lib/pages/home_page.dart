@@ -2,6 +2,7 @@ import 'package:bwa_cozy/models/city.dart';
 import 'package:bwa_cozy/models/space.dart';
 import 'package:bwa_cozy/models/tips.dart';
 import 'package:bwa_cozy/theme.dart';
+import 'package:bwa_cozy/widgets/bottom_bar.dart';
 import 'package:bwa_cozy/widgets/city_card.dart';
 import 'package:bwa_cozy/widgets/space_card.dart';
 import 'package:bwa_cozy/widgets/tips_card.dart';
@@ -169,9 +170,40 @@ class HomePage extends StatelessWidget {
                   updatedAt: 'Updated 11 Dec'))
             ],
           ),
-          SizedBox(height: 145,)
+          SizedBox(
+            height: 100,
+          ),
         ],
       )),
+      floatingActionButton: Container(
+        width: MediaQuery.of(context).size.width - (2 * jarak),
+        height: 65,
+        margin: EdgeInsets.symmetric(horizontal: jarak),
+        decoration: BoxDecoration(
+            color: Color(0xffF6F7F8), borderRadius: BorderRadius.circular(23)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            BottomBar(
+              imageUrl: 'assets/Icon_home_active.png',
+              isActive: true,
+            ),
+            BottomBar(
+              imageUrl: 'assets/Icon_mail.png',
+              isActive: false,
+            ),
+            BottomBar(
+              imageUrl: 'assets/Icon_card.png',
+              isActive: false,
+            ),
+            BottomBar(
+              imageUrl: 'assets/Icon_love.png',
+              isActive: false,
+            )
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
