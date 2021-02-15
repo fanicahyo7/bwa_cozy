@@ -12,9 +12,10 @@ class SpaceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => DetailPage(space)));
       },
-          child: Row(
+      child: Row(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(18),
@@ -23,10 +24,11 @@ class SpaceCard extends StatelessWidget {
               height: 110,
               child: Stack(
                 children: [
-                  Container(
-                    child: Image.asset(
-                      space.imageUrl,
-                    ),
+                  Image.network(
+                    space.imageUrl,
+                    width: 130,
+                    height: 110,
+                    fit: BoxFit.cover,
                   ),
                   Align(
                     alignment: Alignment.topRight,
@@ -79,7 +81,8 @@ class SpaceCard extends StatelessWidget {
               ),
               Text.rich(TextSpan(
                   text: '\$${space.price}',
-                  style: poppinsMedium.copyWith(color: purpleColor, fontSize: 16),
+                  style:
+                      poppinsMedium.copyWith(color: purpleColor, fontSize: 16),
                   children: [
                     TextSpan(
                         text: ' / month',

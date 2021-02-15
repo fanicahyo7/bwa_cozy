@@ -1,16 +1,20 @@
 import 'package:bwa_cozy/models/city.dart';
 import 'package:bwa_cozy/models/space.dart';
 import 'package:bwa_cozy/models/tips.dart';
+import 'package:bwa_cozy/providers/space_providers.dart';
 import 'package:bwa_cozy/theme.dart';
 import 'package:bwa_cozy/widgets/bottom_bar.dart';
 import 'package:bwa_cozy/widgets/city_card.dart';
 import 'package:bwa_cozy/widgets/space_card.dart';
 import 'package:bwa_cozy/widgets/tips_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var spaceProvider = Provider.of<SpaceProvider>(context);
+
     return Scaffold(
       body: SafeArea(
           child: ListView(
@@ -105,42 +109,30 @@ class HomePage extends StatelessWidget {
             height: 16,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: jarak),
-            child: Column(
-              children: [
-                SpaceCard(Space(
-                    id: 1,
-                    name: 'Kuretakeso Hott',
-                    rating: 4,
-                    price: 52,
-                    city: 'Bandung',
-                    country: 'Germany',
-                    imageUrl: 'assets/reko1.png')),
-                SizedBox(
-                  height: 30,
-                ),
-                SpaceCard(Space(
-                    id: 1,
-                    name: 'Roemah Nenek',
-                    rating: 5,
-                    price: 11,
-                    city: 'Seattle',
-                    country: 'Bogor',
-                    imageUrl: 'assets/reko2.png')),
-                SizedBox(
-                  height: 30,
-                ),
-                SpaceCard(Space(
-                    id: 1,
-                    name: 'Darrling How',
-                    rating: 3,
-                    price: 20,
-                    city: 'Jakarta',
-                    country: 'Indonesia',
-                    imageUrl: 'assets/reko3.png'))
-              ],
-            ),
-          ),
+              padding: EdgeInsets.symmetric(horizontal: jarak),
+              child: FutureBuilder(
+                future: spaceProvider.getRecommendedSpaces(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<Space> data = snapshot.data;
+
+                    int index = 0;
+
+                    return Column(
+                      children: data.map((e) {
+                        index++;
+                        return Container(
+                          margin: EdgeInsets.only(top: index != 1 ? 30 : 0),
+                          child: SpaceCard(e),
+                        );
+                      }).toList(),
+                    );
+                  }
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              )),
           SizedBox(
             height: 30,
           ),
